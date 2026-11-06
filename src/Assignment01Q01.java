@@ -1,6 +1,9 @@
 public class Assignment01Q01 {
     public static void main(String[] args) {
-        // TODO: Implement Q01
-        System.out.println("Hello World!");
+        int len = args.length;
+        System.err.println(len);
+        for (int i=0; i < len; i++){
+            
+        }
     }
 }
