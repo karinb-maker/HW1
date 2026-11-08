@@ -3,7 +3,12 @@ import java.util.Arrays;
 public class Assignment01Q04 {
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
-        // TODO: implement
+        if (direction == 'L'){
+
+        }
+        else if (direction == 'R'){
+
+        }
         return array;
     }
 
