@@ -3,13 +3,40 @@ import java.util.Arrays;
 public class Assignment01Q04 {
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
+        int len = array.length;
+        if (move == len) return array;
+
+
         if (direction == 'L'){
+            array= shiftArray(array, move, -1,len);
 
         }
         else if (direction == 'R'){
+            array= shiftArray(array, move, 1,len);
 
         }
         return array;
+    }
+
+    @SuppressWarnings("ManualArrayToCollectionCopy")
+    private static int[] shiftArray (int[] array, int move, int direction, int len){
+
+        int[] tmp = new int[len];
+        for (int i =0; i< len; i++){
+            int index =( i + direction*move)% len;
+           
+            if (index<0){
+                index = index + len;
+            }
+
+            tmp[index] = array[i];
+
+            
+        }
+
+
+
+        return tmp;
     }
 
     public static void main(String[] args) {
