@@ -1,9 +1,13 @@
 public class Assignment01Q05 {
     public static int findShortestPath(int[][] m, int i, int j) {
-        if (i == j) return 0;
+        if (i ==j){
+            // arrived
+            return 0;
+        }
 
         return -1;
     }
+
 
     public static void main(String[] args) {
         System.out.println(
