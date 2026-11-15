@@ -6,45 +6,47 @@ public class Assignment01Q05 {
         if(i==j){
             return 0;
         }
+        int N = m.length;
 
-        int[] dis = new int[m.length];
-        dis[i] =1;
+        int[] dis = new int[N];
+        for (int k =0; k< N; k++ ){
+            dis[k] = Integer.MAX_VALUE;
+        }
+        dis[i] =0;
+       
         // array to keep the distace
 
         int path =fsp(m, i, j, dis,0);
      
-        if (path ==1){
+        if (path <= 0 || dis[j] == Integer.MAX_VALUE){
             return -1;
         }
-        return path-1;
+        return path;
     }
 
     private static int fsp (int[][] m, int i, int j, int [] dis, int hops){
 
         if (i ==j){
             // arrived   
-            return hops+1;
+            return hops;
         }
 
-        for (int k=0; k<m.length; k++){
-            if(m[i][k] == 1){
-                // got somewhere to go
-                if (dis[k] == 0){
-                    // not been there yet
-                    dis[k] =1;
-                    hops = fsp(m,k,j,dis, hops +1);
-                }
-                else{
-                    // already been here -> loop -> need dealing with
-                    hops --;
-                    
-                   
+        int path = Integer.MAX_VALUE;
 
+        for (int k=0; k<m.length; k++){
+            if(m[i][k] != 0){
+                // got somewhere to go
+                int currHop = hops +1;
+                if ( dis[k] > currHop ){
+                    // not been there yet
+                    dis[k] =currHop;
+                    path = Math.min(fsp(m,k,j,dis, currHop), path);
                 }
+            
             }
         }
 
-        return hops;
+        return path;
 
     }
 
@@ -57,6 +59,6 @@ public class Assignment01Q05 {
         System.out.println(
             findShortestPath(new int[][]{{0,1,0,0}, {0,0,1,0}, {0,0,0,1}, {1,0,0,0}}, 0, 2)); // 2
         System.out.println(
-            findShortestPath(new int[][]{{0,1,0,0}, {0,0,0,1}, {0,0,0,0}, {0,0,1,0}}, 0, 2)); // 3
+            findShortestPath(new int[][]{{1,1,0,1}, {1,0,0,1}, {0,0,0,0}, {1,0,1,0}}, 0, 2)); // 2
     }
 }
