@@ -1,49 +1,54 @@
+import java.util.Arrays;
+
 public class Assignment01Q05 {
     public static int findShortestPath(int[][] m, int i, int j) {
-        // max distance = N -> N = tot nodes in graph
-        // if distance > N -> loop
-         if(i==j){
+
+        if(i==j){
             return 0;
         }
-        int N = m.length;
 
-        int dis = dis(m, i, j, N, N, new int[N]);
-        if (dis< N+1){return dis;}
+        int[] dis = new int[m.length];
+        dis[i] =1;
+        // array to keep the distace
 
-
-       
-
-       
-        return -1;
-        
+        int path =fsp(m, i, j, dis,0);
+        System.out.println(Arrays.toString(dis));
+     
+        if (path ==1){
+            return -1;
+        }
+        return path-1;
     }
 
-    public static int dis(int[][]m, int i, int j, int hops, int next, int[]visited){
-          if(i==j){
-            return hops;
-        }
-        int path =m.length+1; 
-        for (int k=0; k< m.length-1; k++){
+    private static int fsp (int[][] m, int i, int j, int [] dis, int hops){
 
-            if (m[i][k] ==1 && visited[k] ==0 ){
-                visited[k] =1;
-                path = dis(m, next,  j,hops+1, k, visited);
-                if (path >hops){
-                    path = hops;
+        if (i ==j){
+            // arrived   
+            return hops+1;
+        }
+
+        for (int k=0; k<m.length; k++){
+            if(m[i][k] == 1){
+                // got somewhere to go
+                if (dis[k] == 0){
+                    // not been there yet
+                    dis[k] =1;
+                    hops = fsp(m,k,j,dis, hops +1);
+                }
+                else{
+                    // already been here -> loop -> need dealing with
+                    hops --;
+                    
+                   
+
                 }
             }
         }
 
-        
-        return Math.min (m.length+1, path);
-
+        return hops;
 
     }
 
-
-
-
- 
 
     public static void main(String[] args) {
         System.out.println(
@@ -53,6 +58,6 @@ public class Assignment01Q05 {
         System.out.println(
             findShortestPath(new int[][]{{0,1,0,0}, {0,0,1,0}, {0,0,0,1}, {1,0,0,0}}, 0, 2)); // 2
         System.out.println(
-            findShortestPath(new int[][]{{1,1,0,1}, {0,0,0,1}, {0,0,0,0}, {0,0,1,0}}, 0, 2)); // 2
+            findShortestPath(new int[][]{{0,1,0,0}, {0,0,0,1}, {0,0,0,0}, {0,0,1,0}}, 0, 2)); // 3
     }
 }
