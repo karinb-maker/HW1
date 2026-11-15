@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 
 public class Assignment01Q05 {
     public static int findShortestPath(int[][] m, int i, int j) {
@@ -12,7 +12,6 @@ public class Assignment01Q05 {
         // array to keep the distace
 
         int path =fsp(m, i, j, dis,0);
-        System.out.println(Arrays.toString(dis));
      
         if (path ==1){
             return -1;
